@@ -1,2 +1,2 @@
-# Ohtu-tehtävat 2022
+# Ohtu-tehtävät 2022
 
