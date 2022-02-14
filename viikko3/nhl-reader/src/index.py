@@ -26,6 +26,8 @@ def main():
 
         players.append(player)
 
+    players.sort(key=lambda p: p.assists + p.goals, reverse=True)
+    
     nationality = "FIN"
     print(f"Players from {nationality} {datetime.datetime.now()}\n")
 
