@@ -36,11 +36,3 @@ Go To Login Page
 
 Go To Register Page
     Go To  ${REGISTER_URL}
-
-Set Username
-    [Arguments]  ${username}
-    Input Text  username  ${username}
-
-Set Password
-    [Arguments]  ${password}
-    Input Password  password  ${password}

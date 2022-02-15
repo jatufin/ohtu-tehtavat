@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Resource  login_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Go To Register Page
@@ -33,6 +34,24 @@ Register With Nonmatching Password And Password Confirmation
     Submit Registration
     Registration Should Fail With Message  Passwords don't match
 
+Login After Successful Registration
+    Set Username  maija
+    Set Password  maija123
+    Set Password Confirmation  maija123
+    Submit Registration
+    Go To Login Page
+    Login With Credentials  maija  maija123
+    Login Should Succeed
+
+Login After Failed Registration
+    Set Username  mai
+    Set Password  maija123
+    Set Password Confirmation  maija123
+    Submit Registration
+    Go To Login Page
+    Login With Credentials  mai  maija123
+    Login Should Fail With Message  Invalid username or password
+    
 *** Keywords ***
 Set Password Confirmation
     [Arguments]  ${password}
