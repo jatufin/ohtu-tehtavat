@@ -17,30 +17,30 @@ class IntJoukko:
         else:
             self.kasvatuskoko = kasvatuskoko
 
-        self.ljono = [0] * self.kapasiteetti
+        self.lukujono = [0] * self.kapasiteetti
 
-        self.alkioiden_lkm = 0
+        self.alkioiden_lukumaara = 0
 
     def kuuluu(self, n):
-        return n in self.ljono
+        return n in self.lukujono
     
     def lisaa(self, n):
-        if self.alkioiden_lkm == 0:
-            self.ljono[0] = n
-            self.alkioiden_lkm = self.alkioiden_lkm + 1
+        if self.alkioiden_lukumaara == 0:
+            self.lukujono[0] = n
+            self.alkioiden_lukumaara = self.alkioiden_lukumaara + 1
             return True
         else:
             pass
 
         if not self.kuuluu(n):
-            self.ljono[self.alkioiden_lkm] = n
-            self.alkioiden_lkm = self.alkioiden_lkm + 1
+            self.lukujono[self.alkioiden_lukumaara] = n
+            self.alkioiden_lukumaara = self.alkioiden_lukumaara + 1
 
-            if self.alkioiden_lkm % len(self.ljono) == 0:
-                taulukko_old = self.ljono
-                self.kopioi_taulukko(self.ljono, taulukko_old)
-                self.ljono = [0] * (self.alkioiden_lkm + self.kasvatuskoko)
-                self.kopioi_taulukko(taulukko_old, self.ljono)
+            if self.alkioiden_lukumaara % len(self.lukujono) == 0:
+                taulukko_old = self.lukujono
+                self.kopioi_taulukko(self.lukujono, taulukko_old)
+                self.lukujono = [0] * (self.alkioiden_lukumaara + self.kasvatuskoko)
+                self.kopioi_taulukko(taulukko_old, self.lukujono)
 
             return True
 
@@ -50,19 +50,19 @@ class IntJoukko:
         kohta = -1
         apu = 0
 
-        for i in range(0, self.alkioiden_lkm):
-            if n == self.ljono[i]:
+        for i in range(0, self.alkioiden_lukumaara):
+            if n == self.lukujono[i]:
                 kohta = i  # siis luku löytyy tuosta kohdasta :D
-                self.ljono[kohta] = 0
+                self.lukujono[kohta] = 0
                 break
 
         if kohta != -1:
-            for j in range(kohta, self.alkioiden_lkm - 1):
-                apu = self.ljono[j]
-                self.ljono[j] = self.ljono[j + 1]
-                self.ljono[j + 1] = apu
+            for j in range(kohta, self.alkioiden_lukumaara - 1):
+                apu = self.lukujono[j]
+                self.lukujono[j] = self.lukujono[j + 1]
+                self.lukujono[j + 1] = apu
 
-            self.alkioiden_lkm = self.alkioiden_lkm - 1
+            self.alkioiden_lukumaara = self.alkioiden_lukumaara - 1
             return True
 
         return False
@@ -72,13 +72,13 @@ class IntJoukko:
             b[i] = a[i]
 
     def mahtavuus(self):
-        return self.alkioiden_lkm
+        return self.alkioiden_lukumaara
 
     def to_int_list(self):
-        taulu = [0] * self.alkioiden_lkm
+        taulu = [0] * self.alkioiden_lukumaara
 
         for i in range(0, len(taulu)):
-            taulu[i] = self.ljono[i]
+            taulu[i] = self.lukujono[i]
 
         return taulu
 
@@ -125,15 +125,15 @@ class IntJoukko:
         return x, a_taulu, b_taulu
     
     def __str__(self):
-        if self.alkioiden_lkm == 0:
+        if self.alkioiden_lukumaara == 0:
             return "{}"
-        elif self.alkioiden_lkm == 1:
-            return "{" + str(self.ljono[0]) + "}"
+        elif self.alkioiden_lukumaara == 1:
+            return "{" + str(self.lukujono[0]) + "}"
         else:
             tuotos = "{"
-            for i in range(0, self.alkioiden_lkm - 1):
-                tuotos = tuotos + str(self.ljono[i])
+            for i in range(0, self.alkioiden_lukumaara - 1):
+                tuotos = tuotos + str(self.lukujono[i])
                 tuotos = tuotos + ", "
-            tuotos = tuotos + str(self.ljono[self.alkioiden_lkm - 1])
+            tuotos = tuotos + str(self.lukujono[self.alkioiden_lukumaara - 1])
             tuotos = tuotos + "}"
             return tuotos
