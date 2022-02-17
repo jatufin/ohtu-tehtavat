@@ -65,7 +65,7 @@ class TestOstoskori(unittest.TestCase):
         kahvi = Tuote("Kahvi", 10)
         
         self.kori.lisaa_tuote(self.maito)
-        self.kori.lisaa_tuote(self.maito)
+        self.kori.lisaa_tuote(self.kahvi)
 
         ostokset = self.kori.ostokset()
         
@@ -74,11 +74,12 @@ class TestOstoskori(unittest.TestCase):
 
     def test_kahden_saman_tuotteen_lisaamisen_jalkeen_on_lukumaara_kaksi(self):
         
-
         self.kori.lisaa_tuote(self.maito)
         self.kori.lisaa_tuote(self.maito)
 
-        ostos = self.kori.ostokset()[0]
+        ostokset = self.kori.ostokset()
+        ostos = ostokset[0]
         
+        self.assertEqual(len(ostokset), 1)                
         self.assertEqual(ostos.lukumaara(), 2)        
         
