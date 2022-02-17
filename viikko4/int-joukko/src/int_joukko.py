@@ -51,13 +51,8 @@ class IntJoukko:
         return self.alkioiden_lukumaara
 
     def to_int_list(self):
-        taulu = [0] * self.alkioiden_lukumaara
-
-        for i in range(0, len(taulu)):
-            taulu[i] = self.lukujono[i]
-
-        return taulu
-
+        return self.lukujono[:self.alkioiden_lukumaara]
+    
     @staticmethod
     def yhdiste(a, b):
         x, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
