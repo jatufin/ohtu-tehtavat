@@ -25,26 +25,17 @@ class IntJoukko:
         return n in self.lukujono
     
     def lisaa(self, n):
-        if self.alkioiden_lukumaara == 0:
-            self.lukujono[0] = n
-            self.alkioiden_lukumaara = self.alkioiden_lukumaara + 1
-            return True
-        else:
-            pass
+        if self.kuuluu(n):
+            return False
+        
+        self.lukujono[self.alkioiden_lukumaara] = n
+        self.alkioiden_lukumaara += 1
+        
+        if self.alkioiden_lukumaara == len(self.lukujono):
+            self.lukujono += [0] * self.kasvatuskoko
 
-        if not self.kuuluu(n):
-            self.lukujono[self.alkioiden_lukumaara] = n
-            self.alkioiden_lukumaara = self.alkioiden_lukumaara + 1
+        return True
 
-            if self.alkioiden_lukumaara % len(self.lukujono) == 0:
-                taulukko_old = self.lukujono
-                self.kopioi_taulukko(self.lukujono, taulukko_old)
-                self.lukujono = [0] * (self.alkioiden_lukumaara + self.kasvatuskoko)
-                self.kopioi_taulukko(taulukko_old, self.lukujono)
-
-            return True
-
-        return False
 
     def poista(self, n):
         kohta = -1
