@@ -54,8 +54,8 @@ class IntJoukko:
         return self.lukujono[:self.alkioiden_lukumaara]
     
     @staticmethod
-    def yhdiste(a, b):
-        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
+    def yhdiste(joukko_a, joukko_b):
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(joukko_a, joukko_b)
 
         for n in (a_taulu + b_taulu):
             uusi_joukko.lisaa(n)
@@ -63,8 +63,8 @@ class IntJoukko:
         return uusi_joukko
 
     @staticmethod
-    def leikkaus(a, b):
-        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)        
+    def leikkaus(joukko_a, joukko_b):
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(joukko_a, joukko_b)        
 
         for n in a_taulu:
             if n in b_taulu:
@@ -73,8 +73,8 @@ class IntJoukko:
         return uusi_joukko
 
     @staticmethod
-    def erotus(a, b):
-        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
+    def erotus(joukko_a, joukko_b):
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(joukko_a, joukko_b)        
 
         for n in a_taulu:
             if n not in b_taulu:
@@ -83,23 +83,12 @@ class IntJoukko:
         return uusi_joukko
 
     @staticmethod
-    def parametrit(a, b):
+    def parametrit(joukko_a, joukko_b):
         uusi_joukko = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+        a_taulu = joukko_a.to_int_list()
+        b_taulu = joukko_b.to_int_list()
 
         return uusi_joukko, a_taulu, b_taulu
     
     def __str__(self):
-        if self.alkioiden_lukumaara == 0:
-            return "{}"
-        elif self.alkioiden_lukumaara == 1:
-            return "{" + str(self.lukujono[0]) + "}"
-        else:
-            tuotos = "{"
-            for i in range(0, self.alkioiden_lukumaara - 1):
-                tuotos = tuotos + str(self.lukujono[i])
-                tuotos = tuotos + ", "
-            tuotos = tuotos + str(self.lukujono[self.alkioiden_lukumaara - 1])
-            tuotos = tuotos + "}"
-            return tuotos
+        return "{" + ", ".join(map(str, self.lukujono[:self.alkioiden_lukumaara])) + "}"
