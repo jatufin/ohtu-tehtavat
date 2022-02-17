@@ -55,42 +55,42 @@ class IntJoukko:
     
     @staticmethod
     def yhdiste(a, b):
-        x, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
 
         for n in (a_taulu + b_taulu):
-            x.lisaa(n)
+            uusi_joukko.lisaa(n)
 
-        return x
+        return uusi_joukko
 
     @staticmethod
     def leikkaus(a, b):
-        y, a_taulu, b_taulu = IntJoukko.parametrit(a, b)        
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)        
 
         for i in range(0, len(a_taulu)):
             for j in range(0, len(b_taulu)):
                 if a_taulu[i] == b_taulu[j]:
-                    y.lisaa(b_taulu[j])
+                    uusi_joukko.lisaa(b_taulu[j])
 
-        return y
+        return uusi_joukko
 
     @staticmethod
     def erotus(a, b):
-        z, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
         for i in range(0, len(a_taulu)):
-            z.lisaa(a_taulu[i])
+            uusi_joukko.lisaa(a_taulu[i])
 
         for i in range(0, len(b_taulu)):
-            z.poista(b_taulu[i])
+            uusi_joukko.poista(b_taulu[i])
 
-        return z
+        return uusi_joukko
 
     @staticmethod
-    def parametrit(a,b):
-        x = IntJoukko()
+    def parametrit(a, b):
+        uusi_joukko = IntJoukko()
         a_taulu = a.to_int_list()
         b_taulu = b.to_int_list()
 
-        return x, a_taulu, b_taulu
+        return uusi_joukko, a_taulu, b_taulu
     
     def __str__(self):
         if self.alkioiden_lukumaara == 0:
