@@ -96,9 +96,7 @@ class IntJoukko:
 
     @staticmethod
     def yhdiste(a, b):
-        x = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+        x, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
 
         for i in range(0, len(a_taulu)):
             x.lisaa(a_taulu[i])
@@ -110,9 +108,7 @@ class IntJoukko:
 
     @staticmethod
     def leikkaus(a, b):
-        y = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
+        y, a_taulu, b_taulu = IntJoukko.parametrit(a, b)        
 
         for i in range(0, len(a_taulu)):
             for j in range(0, len(b_taulu)):
@@ -123,10 +119,7 @@ class IntJoukko:
 
     @staticmethod
     def erotus(a, b):
-        z = IntJoukko()
-        a_taulu = a.to_int_list()
-        b_taulu = b.to_int_list()
-
+        z, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
         for i in range(0, len(a_taulu)):
             z.lisaa(a_taulu[i])
 
@@ -135,6 +128,14 @@ class IntJoukko:
 
         return z
 
+    @staticmethod
+    def parametrit(a,b):
+        x = IntJoukko()
+        a_taulu = a.to_int_list()
+        b_taulu = b.to_int_list()
+
+        return x, a_taulu, b_taulu
+    
     def __str__(self):
         if self.alkioiden_lkm == 0:
             return "{}"
