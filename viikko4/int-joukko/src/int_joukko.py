@@ -55,7 +55,7 @@ class IntJoukko:
     
     @staticmethod
     def yhdiste(a, b):
-        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
+        uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
 
         for n in (a_taulu + b_taulu):
             uusi_joukko.lisaa(n)
@@ -66,21 +66,19 @@ class IntJoukko:
     def leikkaus(a, b):
         uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)        
 
-        for i in range(0, len(a_taulu)):
-            for j in range(0, len(b_taulu)):
-                if a_taulu[i] == b_taulu[j]:
-                    uusi_joukko.lisaa(b_taulu[j])
+        for n in a_taulu:
+            if n in b_taulu:
+                uusi_joukko.lisaa(n)
 
         return uusi_joukko
 
     @staticmethod
     def erotus(a, b):
         uusi_joukko, a_taulu, b_taulu = IntJoukko.parametrit(a, b)
-        for i in range(0, len(a_taulu)):
-            uusi_joukko.lisaa(a_taulu[i])
 
-        for i in range(0, len(b_taulu)):
-            uusi_joukko.poista(b_taulu[i])
+        for n in a_taulu:
+            if n not in b_taulu:
+                uusi_joukko.lisaa(n)
 
         return uusi_joukko
 
