@@ -7,16 +7,16 @@ class IntJoukko:
             self,
             kapasiteetti: int = KAPASITEETTI,
             kasvatuskoko: int = OLETUSKASVATUS):
+
         if kapasiteetti < 0:
             raise Exception("Väärä kapasiteetti")
-        else:
-            self.kapasiteetti = kapasiteetti
 
         if kasvatuskoko < 0:
             raise Exception("Väärä kasvatuskoko")
-        else:
-            self.kasvatuskoko = kasvatuskoko
 
+        self.kapasiteetti = kapasiteetti
+        self.kasvatuskoko = kasvatuskoko
+        
         self.lukujono = [0] * self.kapasiteetti
 
         self.alkioiden_lukumaara = 0
@@ -26,7 +26,7 @@ class IntJoukko:
     
     def lisaa(self, n):
         if self.kuuluu(n):
-            return False
+            return
         
         self.lukujono[self.alkioiden_lukumaara] = n
         self.alkioiden_lukumaara += 1
@@ -34,18 +34,13 @@ class IntJoukko:
         if self.alkioiden_lukumaara == len(self.lukujono):
             self.lukujono += [0] * self.kasvatuskoko
 
-        return True
-
-
     def poista(self, n):
         if not self.kuuluu(n):
-            return False
+            return
 
         self.lukujono.remove(n)
         self.lukujono.append(0)
         self.alkioiden_lukumaara -= 1
-
-        return True
 
     def mahtavuus(self):
         return self.alkioiden_lukumaara
