@@ -20,7 +20,7 @@ class Ostoskori:
 
         for tuote in self._ostokset:
             yhteishinta += tuote.hinta()
-            
+
         return yhteishinta
 
     def lisaa_tuote(self, lisattava: Tuote):
@@ -28,7 +28,7 @@ class Ostoskori:
             if(ostos.tuote == lisattava):
                 ostos.muuta_lukumaaraa(1)
                 return
-            
+
         self._ostokset.append(Ostos(lisattava))
         # lisää tuotteen
 
