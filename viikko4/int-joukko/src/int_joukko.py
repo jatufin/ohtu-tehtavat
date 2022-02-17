@@ -57,11 +57,8 @@ class IntJoukko:
     def yhdiste(a, b):
         x, a_taulu, b_taulu = IntJoukko.parametrit(a, b)                
 
-        for i in range(0, len(a_taulu)):
-            x.lisaa(a_taulu[i])
-
-        for i in range(0, len(b_taulu)):
-            x.lisaa(b_taulu[i])
+        for n in (a_taulu + b_taulu):
+            x.lisaa(n)
 
         return x
 
