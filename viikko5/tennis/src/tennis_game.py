@@ -14,12 +14,34 @@ class TennisGame:
         @property
         def score(self):
             return self._score
+
+        def get_score(self, otherPlayer):
+            score_strings = ["Love", "Fifteen", "Thirty", "Forty"]
         
+            if self.score == otherPlayer.score:
+                if self.score > 3:
+                    return "Deuce"
+                else:
+                    return score_strings[self.score] + "-All"
+                
+            if self.score >= 4 or otherPlayer.score >= 4:
+                difference = self.score - otherPlayer.score
+                    
+                if difference > 0:
+                    playerName = self.name
+                else:
+                    playerName = otherPlayer.name
+                        
+                if abs(difference) == 1:
+                    return "Advantage " + playerName
+                else:
+                    return "Win for " + playerName
+
+            return score_strings[self.score] + "-" + score_strings[otherPlayer.score]
+
     def __init__(self, nameA, nameB):
         self.playerA = self.Player(nameA)
-        self.playerB = self.Player(nameB)        
-
-        self.score_strings = ["Love", "Fifteen", "Thirty", "Forty"]
+        self.playerB = self.Player(nameB)       
 
     def won_point(self, player_name):
         if player_name == self.playerA.name:
@@ -28,24 +50,6 @@ class TennisGame:
             self.playerB.addPoint()
 
     def get_score(self):
-        if self.playerA.score == self.playerB.score:
-            if self.playerA.score > 3:
-                return "Deuce"
-            else:
-                return self.score_strings[self.playerA.score] + "-All"
+        return self.playerA.get_score(self.playerB)
 
-        if self.playerA.score >= 4 or self.playerB.score >= 4:
-            difference = self.playerA.score - self. playerB.score
-
-            if difference > 0:
-                playerName = self.playerA.name
-            else:
-                playerName = self.playerB.name
-                
-            if abs(difference) == 1:
-                return "Advantage " + playerName
-            else:
-                return "Win for " + playerName
-
-        return self.score_strings[self.playerA.score] + "-" + self.score_strings[self.playerB.score]
 
