@@ -1,8 +1,11 @@
+
+
 class TennisGame:
     class Player:
         def __init__(self, name):
             self._name = name
             self._score = 0
+            self.SCORE_WORDS = ["Love", "Fifteen", "Thirty", "Forty"]
 
         def addPoint(self):
             self._score += 1
@@ -16,31 +19,33 @@ class TennisGame:
             return self._score
 
         def getScore(self, otherPlayer):
-            scoreWords = ["Love", "Fifteen", "Thirty", "Forty"]
-        
             if self.score == otherPlayer.score:
-                if self.score > 3:
-                    return "Deuce"
-                else:
-                    return scoreWords[self.score] + "-All"
-                
-            if self.score < 4 and otherPlayer.score < 4:
-                return scoreWords[self.score] + "-" + scoreWords[otherPlayer.score]
+                return self._scoreInTie(self.score)
 
-            difference = self.score - otherPlayer.score
-            playerName = self.name if difference > 0 else otherPlayer.name
+            if self.score < 4 and otherPlayer.score < 4:
+                return self.SCORE_WORDS[self.score] + "-" + self.SCORE_WORDS[otherPlayer.score]
+
+            return self._scoreInEndGame(self, otherPlayer)
+
+        def _scoreInTie(self, score):
+            if score > 3:
+                return "Deuce"
+            return self.SCORE_WORDS[score] + "-All"
+
+        def _scoreInEndGame(self, playerA, playerB):
+            difference = playerA.score - playerB.score
+            playerName = playerA.name if difference > 0 else playerB.name
 
             if abs(difference) == 1:
                 return "Advantage " + playerName
 
             return "Win for " + playerName
 
-            
 
     def __init__(self, nameA, nameB):
         self.players = {
             nameA: self.Player(nameA),
-            nameB: self.Player(nameB)            
+            nameB: self.Player(nameB)
         }
 
     def won_point(self, playerName):
@@ -49,5 +54,3 @@ class TennisGame:
     def get_score(self):
         playerA, playerB = self.players.values()
         return playerA.getScore(playerB)
-
-
