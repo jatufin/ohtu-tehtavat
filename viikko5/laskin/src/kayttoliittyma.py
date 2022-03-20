@@ -65,12 +65,9 @@ class Kayttoliittyma:
         arvo = self._lue_syote()
         self._komennot[komento].suorita(arvo)
 
-        self._kumoa_painike["state"] = constants.NORMAL
-
-        if self._sovellus.tulos == 0:
-            self._nollaus_painike["state"] = constants.DISABLED
-        else:
-            self._nollaus_painike["state"] = constants.NORMAL
+        self._kumoa_painike["state"] = constants.NORMAL if self._sovellus.edellinenTulos is not None else constants.DISABLED
+        
+        self._nollaus_painike["state"] = constants.DISABLED if self._sovellus.tulos == 0 else constants.NORMAL
 
         self._syote_kentta.delete(0, constants.END)
         self._tulos_var.set(self._sovellus.tulos)
