@@ -24,16 +24,17 @@ class TennisGame:
             return score
 
         if self.playerAScore >= 4 or self.playerBScore >= 4:
-            minus_result = self.playerAScore - self. playerBScore
+            difference = self.playerAScore - self. playerBScore
 
-            if minus_result == 1:
-                score = "Advantage player1"
-            elif minus_result == -1:
-                score = "Advantage player2"
-            elif minus_result >= 2:
-                score = "Win for player1"
+            if difference > 0:
+                playerName = self.playerAName
             else:
-                score = "Win for player2"
+                playerName = self.playerBName
+                
+            if abs(difference) == 1:
+                score = "Advantage " + playerName
+            else:
+                score = "Win for " + playerName
 
             return score
 
