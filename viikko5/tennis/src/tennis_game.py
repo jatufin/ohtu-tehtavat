@@ -13,15 +13,11 @@ class TennisGame:
             self.playerBScore = self.playerBScore + 1
 
     def get_score(self):
-        score = ""
-
         if self.playerAScore == self.playerBScore:
             if self.playerAScore > 3:
-                score = "Deuce"
+                return "Deuce"
             else:
-                score = self.score_strings[self.playerAScore] + "-All"
-
-            return score
+                return self.score_strings[self.playerAScore] + "-All"
 
         if self.playerAScore >= 4 or self.playerBScore >= 4:
             difference = self.playerAScore - self. playerBScore
@@ -32,12 +28,9 @@ class TennisGame:
                 playerName = self.playerBName
                 
             if abs(difference) == 1:
-                score = "Advantage " + playerName
+                return "Advantage " + playerName
             else:
-                score = "Win for " + playerName
+                return "Win for " + playerName
 
-            return score
+        return self.score_strings[self.playerAScore] + "-" + self.score_strings[self.playerBScore]
 
-        score = self.score_strings[self.playerAScore] + "-" + self.score_strings[self.playerBScore]
-
-        return score
