@@ -15,41 +15,39 @@ class TennisGame:
         def score(self):
             return self._score
 
-        def get_score(self, otherPlayer):
-            score_strings = ["Love", "Fifteen", "Thirty", "Forty"]
+        def getScore(self, otherPlayer):
+            scoreWords = ["Love", "Fifteen", "Thirty", "Forty"]
         
             if self.score == otherPlayer.score:
                 if self.score > 3:
                     return "Deuce"
                 else:
-                    return score_strings[self.score] + "-All"
+                    return scoreWords[self.score] + "-All"
                 
-            if self.score >= 4 or otherPlayer.score >= 4:
-                difference = self.score - otherPlayer.score
-                    
-                if difference > 0:
-                    playerName = self.name
-                else:
-                    playerName = otherPlayer.name
-                        
-                if abs(difference) == 1:
-                    return "Advantage " + playerName
-                else:
-                    return "Win for " + playerName
+            if self.score < 4 and otherPlayer.score < 4:
+                return scoreWords[self.score] + "-" + scoreWords[otherPlayer.score]
 
-            return score_strings[self.score] + "-" + score_strings[otherPlayer.score]
+            difference = self.score - otherPlayer.score
+            playerName = self.name if difference > 0 else otherPlayer.name
+
+            if abs(difference) == 1:
+                return "Advantage " + playerName
+
+            return "Win for " + playerName
+
+            
 
     def __init__(self, nameA, nameB):
-        self.playerA = self.Player(nameA)
-        self.playerB = self.Player(nameB)       
+        self.players = {
+            nameA: self.Player(nameA),
+            nameB: self.Player(nameB)            
+        }
 
-    def won_point(self, player_name):
-        if player_name == self.playerA.name:
-            self.playerA.addPoint()
-        else:
-            self.playerB.addPoint()
+    def won_point(self, playerName):
+        self.players[playerName].addPoint()
 
     def get_score(self):
-        return self.playerA.get_score(self.playerB)
+        playerA, playerB = self.players.values()
+        return playerA.getScore(playerB)
 
 
