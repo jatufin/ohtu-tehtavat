@@ -13,3 +13,31 @@ class Sovelluslogiikka:
 
     def aseta_arvo(self, arvo):
         self.tulos = arvo
+
+    class Plus:
+        def __init__(self, sovellus):
+            self._sovellus = sovellus
+
+        def suorita(self, arvo):
+            self._sovellus.plus(arvo)
+
+    class Miinus:
+        def __init__(self, sovellus):
+            self._sovellus = sovellus
+
+        def suorita(self, arvo):
+            self._sovellus.miinus(arvo)
+
+    class Nollaus:
+        def __init__(self, sovellus):
+            self._sovellus = sovellus
+
+        def suorita(self, arvo):
+            self._sovellus.nollaa()
+
+    class Kumoa:
+        def __init__(self, sovellus):
+            self._sovellus = sovellus
+
+        def suorita(self, arvo):
+            pass
