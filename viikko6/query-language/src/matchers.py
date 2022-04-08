@@ -36,30 +36,33 @@ class Not:
 
 
 class PlaysIn:
-    def __init__(self, team):
+    def __init__(self, matcher, team):
+        self._matcher = matcher
         self._team = team
 
     def matches(self, player):
-        return player.team == self._team
+        return player.team == self._team and self._matcher.matches(player)
 
 
 class HasAtLeast:
-    def __init__(self, value, attr):
+    def __init__(self, matcher, value, attr):
+        self._matcher = matcher       
         self._value = value
         self._attr = attr
 
     def matches(self, player):
         player_value = getattr(player, self._attr)
 
-        return player_value >= self._value
+        return player_value >= self._value and self._matcher.matches(player)
 
 
 class HasFewerThan:
-    def __init__(self, value, attr):
+    def __init__(self, matcher, value, attr):
+        self._matcher = matcher               
         self._value = value
         self._attr = attr
 
     def matches(self, player):
         player_value = getattr(player, self._attr)
 
-        return player_value < self._value
+        return player_value < self._value and self._matcher.matches(player)
