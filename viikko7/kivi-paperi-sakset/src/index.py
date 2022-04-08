@@ -10,10 +10,10 @@ def main():
     tuomari = Tuomari()
     tekoaly = Tekoaly()
     parempi_tekoaly = TekoalyParannettu(10)
-    
+
     while True:
         tuomari.nollaa()
-        
+
         print("Valitse pelataanko"
               "\n (a) Ihmistä vastaan"
               "\n (b) Tekoälyä vastaan"
@@ -24,28 +24,23 @@ def main():
         vastaus = input()
 
         if vastaus.endswith("a"):
-            print(
-                "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
-            )
+            aloita(KPS.luo_kaksinpeli(tuomari))
 
-            kaksinpeli = KPS.luo_kaksinpeli(tuomari)
-            kaksinpeli.pelaa()
         elif vastaus.endswith("b"):
-            print(
-                "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
-            )
+            aloita(KPS.luo_yksinpeli(tuomari, tekoaly))
 
-            yksinpeli = KPSTekoaly(tuomari, tekoaly)
-            yksinpeli.pelaa()
         elif vastaus.endswith("c"):
-            print(
-                "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
-            )
+            aloita(KPS.luo_yksinpeli(tuomari, parempi_tekoaly))
 
-            haastava_yksinpeli = KPSTekoaly(tuomari, parempi_tekoaly)
-            haastava_yksinpeli.pelaa()
         else:
             break
-    
+
+def aloita(peli):
+    print(
+                "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
+            )
+    peli.pelaa()
+
+
 if __name__ == "__main__":
     main()
