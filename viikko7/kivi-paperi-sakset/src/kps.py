@@ -24,3 +24,13 @@ class KPS:
 
     def _onko_ok_siirto(self, siirto):
         return siirto == "k" or siirto == "p" or siirto == "s"
+
+    @staticmethod
+    def luo_kaksinpeli(tuomari):
+        from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja        
+        return KPSPelaajaVsPelaaja(tuomari)
+        
+    @staticmethod
+    def luo_yksinpeli(tuomari, tekoaly):
+        from kps_tekoaly import KPSTekoaly
+        return KPSTekoaly(tuomari, tekoaly)
