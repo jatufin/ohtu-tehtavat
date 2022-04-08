@@ -1,5 +1,6 @@
 class KPS:
-    def __init__(self, tuomari):
+    def __init__(self, io, tuomari):
+        self._io = io
         self._tuomari = tuomari
         
     def pelaa(self):
@@ -11,13 +12,13 @@ class KPS:
                 break
             
             self._tuomari.kirjaa_siirto(ekan_siirto, tokan_siirto)
-            print(self._tuomari)
+            self._io.kirjoita(self._tuomari)
 
-        print("Kiitos!")
-        print(self._tuomari)
+        self._io.kirjoita("Kiitos!")
+        self._io.kirjoita(self._tuomari)
         
     def _ensimmaisen_siirto(self):
-        return input("Ensimmäisen pelaajan siirto: ")
+        return self._io.lue("Ensimmäisen pelaajan siirto: ")
 
     def _toisen_siirto(self, ensimmäisen_siirto):
         return "k"
@@ -29,11 +30,11 @@ class KPS:
         return siirto not in "kps"
 
     @staticmethod
-    def luo_kaksinpeli(tuomari):
+    def luo_kaksinpeli(io, tuomari):
         from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja        
-        return KPSPelaajaVsPelaaja(tuomari)
+        return KPSPelaajaVsPelaaja(io, tuomari)
         
     @staticmethod
-    def luo_yksinpeli(tuomari, tekoaly):
+    def luo_yksinpeli(io, tuomari, tekoaly):
         from kps_tekoaly import KPSTekoaly
-        return KPSTekoaly(tuomari, tekoaly)
+        return KPSTekoaly(io, tuomari, tekoaly)
