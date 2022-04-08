@@ -1,12 +1,13 @@
 from kps import KPS
-
-
 from tekoaly import Tekoaly
 from tekoaly_parannettu import TekoalyParannettu
 from tuomari import Tuomari
 
+from kpsio import KonsoliIO
+
 
 def main():
+    io = KonsoliIO()
     tuomari = Tuomari()
     tekoaly = Tekoaly()
     parempi_tekoaly = TekoalyParannettu(10)
@@ -14,32 +15,34 @@ def main():
     while True:
         tuomari.nollaa()
 
-        print("Valitse pelataanko"
-              "\n (a) Ihmistä vastaan"
-              "\n (b) Tekoälyä vastaan"
-              "\n (c) Parannettua tekoälyä vastaan"
-              "\nMuilla valinnoilla lopetetaan"
-              )
+        valinta = valikko(io)
 
-        vastaus = input()
+        if valinta == "a":
+            aloita(KPS.luo_kaksinpeli(io, tuomari), io)
 
-        if vastaus.endswith("a"):
-            aloita(KPS.luo_kaksinpeli(tuomari))
+        elif valinta == "b":
+            aloita(KPS.luo_yksinpeli(io, tuomari, tekoaly), io)
 
-        elif vastaus.endswith("b"):
-            aloita(KPS.luo_yksinpeli(tuomari, tekoaly))
-
-        elif vastaus.endswith("c"):
-            aloita(KPS.luo_yksinpeli(tuomari, parempi_tekoaly))
+        elif valinta == "c":
+            aloita(KPS.luo_yksinpeli(io, tuomari, parempi_tekoaly), io)
 
         else:
             break
 
-def aloita(peli):
-    print(
-                "Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s"
-            )
+        
+def aloita(peli, io):
+    io.kirjoita("Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s")
     peli.pelaa()
+
+
+def valikko(io):
+    io.kirjoita("Valitse pelataanko",
+                "(a) Ihmistä vastaan",
+                "(b) Tekoälyä vastaan",
+                "(c) Parannettua tekoälyä vastaan",
+                "Muilla valinnoilla lopetetaan")
+
+    return io.lue()
 
 
 if __name__ == "__main__":
