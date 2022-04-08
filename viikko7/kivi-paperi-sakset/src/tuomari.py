@@ -2,10 +2,13 @@
 # Luokka pitää kirjaa ensimmäisen ja toisen pelaajan pisteistä sekä tasapelien määrästä.
 class Tuomari:
     def __init__(self):
+        self.nollaa()
+        
+    def nollaa(self):
         self.ekan_pisteet = 0
         self.tokan_pisteet = 0
         self.tasapelit = 0
-
+        
     def kirjaa_siirto(self, ekan_siirto, tokan_siirto):
         if self._tasapeli(ekan_siirto, tokan_siirto):
             self.tasapelit = self.tasapelit + 1
