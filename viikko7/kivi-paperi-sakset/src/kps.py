@@ -1,11 +1,11 @@
 class KPS:
-    def __init__(self, eka_io, toka_io, tuomari):
-        self._eka_io = eka_io
-        self._toka_io = toka_io
+    def __init__(self, eka, toka, tuomari):
+        self._eka = eka
+        self._toka = toka
         self._tuomari = tuomari
         
     def pelaa(self):
-        self._eka_io.kirjoita("Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s")
+        self._eka.kirjoita("Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s")
         
         while True:
             ekan_siirto = self._ensimmaisen_siirto()
@@ -16,20 +16,20 @@ class KPS:
                 break
             
             self._tuomari.kirjaa_siirto(ekan_siirto, tokan_siirto)
-            self._eka_io.kirjoita(self._tuomari)
+            self._eka.kirjoita(self._tuomari)
 
-        self._eka_io.kirjoita("Kiitos!")
-        self._eka_io.kirjoita(self._tuomari)
+        self._eka.kirjoita("Kiitos!")
+        self._eka.kirjoita(self._tuomari)
         
     def _ensimmaisen_siirto(self):
-        return self._eka_io.lue("Ensimmäisen pelaajan siirto: ")
+        return self._eka.lue("Ensimmäisen pelaajan siirto: ")
 
     def _toisen_siirto(self, ensimmaisen_siirto):
-        tokan_siirto = self._toka_io.lue("Toisen pelaajan siirto: ")
-        self._toka_io.kirjoita(ensimmaisen_siirto)
+        tokan_siirto = self._toka.lue("Toisen pelaajan siirto: ")
+        self._toka.kirjoita(ensimmaisen_siirto)
 
-        if self._toka_io.tyyppi == "tietokone":
-            self._eka_io.kirjoita(f"Tietokone valitsi: {tokan_siirto}")
+        if self._toka.tyyppi == "tietokone":
+            self._eka.kirjoita(f"Tietokone valitsi: {tokan_siirto}")
         
         return tokan_siirto
 
@@ -40,5 +40,5 @@ class KPS:
         return siirto not in "kps"
 
     @staticmethod
-    def luo_peli(eka_io, toka_io, tuomari):
-        return KPS(eka_io, toka_io, tuomari)
+    def luo_peli(eka, toka, tuomari):
+        return KPS(eka, toka, tuomari)

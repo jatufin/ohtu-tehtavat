@@ -1,18 +1,18 @@
-class IOTehdas:
+class Pelaajatehdas:
     @staticmethod
-    def luo_ihmis_io():
-        return KonsoliIO()
+    def luo_ihminen():
+        return Ihminen()
 
     @staticmethod    
-    def luo_ihmis_io_ilman_tulostusta():    
-        return KonsoliIO(null_output=True)
+    def luo_ihminen_ilman_tulostusta():    
+        return Ihminen(null_output=True)
     
     @staticmethod    
-    def luo_tekoaly_io(tekoaly):
-        return TekoalyIO(tekoaly)
+    def luo_tekoaly(tekoaly):
+        return Tekoaly(tekoaly)
 
 
-class KpsIO:
+class Pelaaja:
     def __init__(self, tyyppi="tuntematon"):
         self._tyyppi = tyyppi
 
@@ -21,7 +21,7 @@ class KpsIO:
         return self._tyyppi
 
 
-class KonsoliIO(KpsIO):
+class Ihminen(Pelaaja):
     def __init__(self, null_output=False):
         super().__init__(tyyppi="ihminen")
         self._null_output = null_output
@@ -34,7 +34,7 @@ class KonsoliIO(KpsIO):
             print(teksti)
 
 
-class TekoalyIO(KpsIO):
+class Tekoaly(Pelaaja):
     def __init__(self, tekoaly):
         super().__init__(tyyppi="tietokone")        
         self._tekoaly = tekoaly
