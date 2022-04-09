@@ -6,11 +6,11 @@ from pelaajat import Pelaajatehdas
 
 
 def main():
-    eka = Pelaajatehdas.luo_ihminen()
-    toka = Pelaajatehdas.luo_ihminen_ilman_tulostusta()
+    eka = Pelaajatehdas.luo_ihmispelaaja()
+    toka = Pelaajatehdas.luo_ihmispelaaja_ilman_tulostusta()
 
-    tekoaly = Pelaajatehdas.luo_tekoaly(Tekoaly())
-    parempi_tekoaly = Pelaajatehdas.luo_tekoaly(TekoalyParannettu(10))
+    tekoaly = Pelaajatehdas.luo_konepelaaja(Tekoaly())
+    parempi_tekoaly = Pelaajatehdas.luo_konepelaaja(TekoalyParannettu(10))
 
     tuomari = Tuomari()
     komennot = Komennot(eka, toka, tekoaly, parempi_tekoaly, tuomari)

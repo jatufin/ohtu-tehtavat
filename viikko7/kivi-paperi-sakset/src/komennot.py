@@ -2,11 +2,11 @@ from kps import KPS
 
 
 class Komennot:
-    def __init__(self, eka, toka, tekoaly, parempi_tekoaly, tuomari):
+    def __init__(self, eka_ihminen, toka_ihminen, tietokone, parempi_tietokone, tuomari):
         self._komennot = {
-            "a": Peli(eka, toka, tuomari),
-            "b": Peli(eka, tekoaly, tuomari),
-            "c": Peli(eka, parempi_tekoaly, tuomari)
+            "a": Peli(eka_ihminen, toka_ihminen, tuomari),
+            "b": Peli(eka_ihminen, tietokone, tuomari),
+            "c": Peli(eka_ihminen, parempi_tietokone, tuomari)
         }
 
     def suorita(self, komento):
@@ -30,10 +30,10 @@ Muilla valinnoilla lopetetaan"""
 
 
 class Peli:
-    def __init__(self, eka, toka, tuomari):
-        self._eka = eka
-        self._toka = toka
+    def __init__(self, eka_pelaaja, toka_pelaaja, tuomari):
+        self._eka_pelaaja = eka_pelaaja
+        self._toka_pelaaja = toka_pelaaja
         self._tuomari = tuomari
 
     def aloita(self):
-        KPS.luo_peli(self._eka, self._toka, self._tuomari).pelaa()
+        KPS.luo_peli(self._eka_pelaaja, self._toka_pelaaja, self._tuomari).pelaa()

@@ -1,14 +1,14 @@
 class Pelaajatehdas:
     @staticmethod
-    def luo_ihminen():
+    def luo_ihmispelaaja():
         return Ihminen()
 
     @staticmethod
-    def luo_ihminen_ilman_tulostusta():
+    def luo_ihmispelaaja_ilman_tulostusta():
         return Ihminen(null_output=True)
 
     @staticmethod
-    def luo_tekoaly(tekoaly):
+    def luo_konepelaaja(tekoaly):
         return Tekoaly(tekoaly)
 
 
