@@ -1,3 +1,4 @@
+# This dependency can be accepted in a part of the user interface
 from kps import KPS
 
 
@@ -28,7 +29,9 @@ Muilla valinnoilla lopetetaan"""
 
         return pelaaja.lue()
 
-
+# As all the players are inherited from the main Pelaaja class
+# regardless their being human or AI, the need for different
+# Peli classes here in the main menu also disappeared.
 class Peli:
     def __init__(self, eka_pelaaja, toka_pelaaja, tuomari):
         self._eka_pelaaja = eka_pelaaja

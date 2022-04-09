@@ -1,3 +1,9 @@
+# Instead of creating different KPS main game classes based on
+# different type of players, the separation between human and UI
+# players is done in an upper level: The game itself should not
+# be deeply aware if one (or indeed all) of the players are computers
+# or not.
+#
 class Pelaajatehdas:
     @staticmethod
     def luo_ihmispelaaja():
@@ -22,6 +28,9 @@ class Pelaaja:
 
 
 class Ihminen(Pelaaja):
+    # Possibility to suppress the output is to avoid duplicate
+    # printouts in the (usual) case both human players are on
+    # the same console
     def __init__(self, null_output=False):
         super().__init__(tyyppi="ihminen")
         self._null_output = null_output
