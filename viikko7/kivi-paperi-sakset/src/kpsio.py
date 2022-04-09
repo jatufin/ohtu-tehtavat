@@ -1,9 +1,13 @@
 class KonsoliIO:
+    def __init__(self, null_output=False):
+        self._null_output = null_output
+
     def lue(self, teksti=""):
         return input(teksti)
 
     def kirjoita(self, teksti):
-        print(teksti)
+        if not self._null_output:
+            print(teksti)
 
 
 class TekoalyIO():

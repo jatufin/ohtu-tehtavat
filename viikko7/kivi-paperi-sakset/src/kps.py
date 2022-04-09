@@ -1,3 +1,6 @@
+from kpsio import TekoalyIO
+
+
 class KPS:
     def __init__(self, eka_io, toka_io, tuomari):
         self._eka_io = eka_io
@@ -21,8 +24,14 @@ class KPS:
     def _ensimmaisen_siirto(self):
         return self._eka_io.lue("Ensimmäisen pelaajan siirto: ")
 
-    def _toisen_siirto(self, ensimmäisen_siirto):
-        return "k"
+    def _toisen_siirto(self, ensimmaisen_siirto):
+        tokan_siirto = self._toka_io.lue("Toisen pelaajan siirto: ")
+        self._toka_io.kirjoita(ensimmaisen_siirto)
+
+        if self._toka_io.__class__ == TekoalyIO:
+            self._eka_io.kirjoita(f"Tietokone valitsi: {tokan_siirto}")
+        
+        return tokan_siirto
 
     def _tuntematon_siirto(self, siirto):
         if len(siirto) != 1:
@@ -31,11 +40,13 @@ class KPS:
         return siirto not in "kps"
 
     @staticmethod
-    def luo_kaksinpeli(eka_io, toka_io, tuomari):
-        from kps_pelaaja_vs_pelaaja import KPSPelaajaVsPelaaja        
-        return KPSPelaajaVsPelaaja(eka_io, toka_io, tuomari)
+    def luo_peli(eka_io, toka_io, tuomari):
+        return KPS(eka_io, toka_io, tuomari)
+    
+    # @staticmethod
+    # def luo_kaksinpeli(eka_io, toka_io, tuomari):
+    #     return KPS(eka_io, toka_io, tuomari)
         
-    @staticmethod
-    def luo_yksinpeli(io, tuomari, tekoaly):
-        from kps_tekoaly import KPSTekoaly
-        return KPSTekoaly(io, tuomari, tekoaly)
+    # @staticmethod
+    # def luo_yksinpeli(eka_io, toka_io, tuomari):
+    #     return KPS(eka_io, toka_io, tuomari)

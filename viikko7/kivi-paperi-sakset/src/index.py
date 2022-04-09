@@ -35,7 +35,8 @@ class Yksinpeli:
 
 
 def main():
-    io = KonsoliIO()
+    eka_io = KonsoliIO()
+    toka_io = KonsoliIO(null_output=True)
     tuomari = Tuomari()
     tekoaly_io = TekoalyIO(Tekoaly())
     parempi_tekoaly_io = TekoalyIO(TekoalyParannettu(10))
@@ -43,16 +44,16 @@ def main():
     while True:
         tuomari.nollaa()
 
-        valinta = valikko(io)
+        valinta = valikko(eka_io)
 
         if valinta == "a":
-            aloita(KPS.luo_kaksinpeli(io, io, tuomari), io)
+            aloita(KPS.luo_peli(eka_io, toka_io, tuomari), eka_io)
 
         elif valinta == "b":
-            aloita(KPS.luo_yksinpeli(io, tekoaly_io, tuomari), io)
+            aloita(KPS.luo_peli(eka_io, tekoaly_io, tuomari), eka_io)
 
         elif valinta == "c":
-            aloita(KPS.luo_yksinpeli(io, parempi_tekoaly_io, tuomari), io)
+            aloita(KPS.luo_peli(eka_io, parempi_tekoaly_io, tuomari), eka_io)
 
         else:
             break
