@@ -5,6 +5,8 @@ class KPS:
         self._tuomari = tuomari
         
     def pelaa(self):
+        self._eka_io.kirjoita("Peli loppuu kun pelaaja antaa virheellisen siirron eli jonkun muun kuin k, p tai s")
+        
         while True:
             ekan_siirto = self._ensimmaisen_siirto()
             tokan_siirto = self._toisen_siirto(ekan_siirto)
