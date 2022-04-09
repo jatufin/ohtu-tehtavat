@@ -3,14 +3,42 @@ from tekoaly import Tekoaly
 from tekoaly_parannettu import TekoalyParannettu
 from tuomari import Tuomari
 
-from kpsio import KonsoliIO
+from kpsio import KonsoliIO, TekoalyIO
+
+
+class Komennot:
+    def __init__(self, io, tuomari, tekoaly, parempi_tekoaly):
+        self._komennot = {
+            "a": Kaksinpeli(io, tuomari),
+            "b": Yksinpeli(io, tuomari, tekoaly),
+            "c": Yksinpeli(io, tuomari, parempi_tekoaly),
+        }
 
         
+class Kaksinpeli:
+    def __init__(self, io, tuomari):
+        self._io = io
+        self._tuomari = tuomari
+
+    def aloita(self):
+        KPS.luo_kaksinpeli(self._io, self._tuomari).pelaa()
+
+
+class Yksinpeli:
+    def __init__(self, io, tuomari, tekoaly):
+        self._io = io
+        self._tuomari = tuomari
+        self._tekoaly = Tekoaly
+
+    def aloita(self):
+        KPS.luo_kaksinpeli(self._io, self._tuomari).pelaa()
+
+
 def main():
     io = KonsoliIO()
     tuomari = Tuomari()
-    tekoaly = Tekoaly()
-    parempi_tekoaly = TekoalyParannettu(10)
+    tekoaly_io = TekoalyIO(Tekoaly())
+    parempi_tekoaly_io = TekoalyIO(TekoalyParannettu(10))
 
     while True:
         tuomari.nollaa()
@@ -18,13 +46,13 @@ def main():
         valinta = valikko(io)
 
         if valinta == "a":
-            aloita(KPS.luo_kaksinpeli(io, tuomari), io)
+            aloita(KPS.luo_kaksinpeli(io, io, tuomari), io)
 
         elif valinta == "b":
-            aloita(KPS.luo_yksinpeli(io, tuomari, tekoaly), io)
+            aloita(KPS.luo_yksinpeli(io, tekoaly_io, tuomari), io)
 
         elif valinta == "c":
-            aloita(KPS.luo_yksinpeli(io, tuomari, parempi_tekoaly), io)
+            aloita(KPS.luo_yksinpeli(io, parempi_tekoaly_io, tuomari), io)
 
         else:
             break
@@ -36,11 +64,13 @@ def aloita(peli, io):
 
 
 def valikko(io):
-    io.kirjoita("Valitse pelataanko",
-                "(a) Ihmistä vastaan",
-                "(b) Tekoälyä vastaan",
-                "(c) Parannettua tekoälyä vastaan",
-                "Muilla valinnoilla lopetetaan")
+    teksti = """
+Valitse pelataanko
+(a) Ihmistä vastaan
+(b) Tekoälyä vastaan
+(c) Parannettua tekoälyä vastaan
+Muilla valinnoilla lopetetaan"""
+    io.kirjoita(teksti)
 
     return io.lue()
 
