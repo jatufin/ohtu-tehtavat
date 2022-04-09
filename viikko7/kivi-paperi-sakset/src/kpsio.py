@@ -1,5 +1,15 @@
-class KonsoliIO:
+class KpsIO:
+    def __init__(self, tyyppi="tuntematon"):
+        self._tyyppi = tyyppi
+
+    @property
+    def tyyppi(self):
+        return self._tyyppi
+
+
+class KonsoliIO(KpsIO):
     def __init__(self, null_output=False):
+        super().__init__(tyyppi="ihminen")
         self._null_output = null_output
 
     def lue(self, teksti=""):
@@ -10,8 +20,9 @@ class KonsoliIO:
             print(teksti)
 
 
-class TekoalyIO():
+class TekoalyIO(KpsIO):
     def __init__(self, tekoaly):
+        super().__init__(tyyppi="tietokone")        
         self._tekoaly = tekoaly
 
     def lue(self, teksti=""):
