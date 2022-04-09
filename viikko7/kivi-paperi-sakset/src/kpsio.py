@@ -1,3 +1,17 @@
+class IOTehdas:
+    @staticmethod
+    def luo_ihmis_io():
+        return KonsoliIO()
+
+    @staticmethod    
+    def luo_ihmis_io_ilman_tulostusta():    
+        return KonsoliIO(null_output=True)
+    
+    @staticmethod    
+    def luo_tekoaly_io(tekoaly):
+        return TekoalyIO(tekoaly)
+
+
 class KpsIO:
     def __init__(self, tyyppi="tuntematon"):
         self._tyyppi = tyyppi
